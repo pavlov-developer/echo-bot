@@ -1,7 +1,6 @@
 import asyncio
 import sys
 import os
-import logging
 
 from dotenv import load_dotenv
 if sys.platform.startswith('win'):
