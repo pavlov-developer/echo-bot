@@ -9,7 +9,7 @@ if sys.platform.startswith('win'):
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 from aiogram import Bot, Dispatcher
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 
 load_dotenv()
@@ -29,6 +29,11 @@ async def cmd_start(message: Message):
         f"Привет, {message.from_user.first_name}! Я эхо-бот. "
         "Пришли что угодно — верну обратно."
     )
+
+
+@dp.message(Command("help"))
+async def cmd_help(message: Message):
+    await message.answer("Это бот Максима. Напиши что-нибудь")
 
 
 @dp.message()
