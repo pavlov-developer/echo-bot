@@ -17,7 +17,7 @@ load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
 
 if not TOKEN:
-    raise ValueError("Токен не найден! Убедись, что файл .env существует и в нём написано BOT_TOKEN=твой_токен")
+    raise ValueError("Token not found! Make sure the .env file exists and contains BOT_TOKEN=your_token")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
@@ -26,14 +26,19 @@ dp = Dispatcher()
 @dp.message(CommandStart())
 async def cmd_start(message: Message):
     await message.answer(
-        f"Привет, {message.from_user.first_name}! Я эхо-бот. "
-        "Пришли что угодно — верну обратно."
+        f"🇷🇺: Привет, {message.from_user.first_name}! Я эхо-бот.\n"
+        "Пришли что угодно — верну обратно.\n\n"
+        f"🇬🇧: Hello, {message.from_user.first_name}! I am an echo bot.\n" 
+        "Send me anything — I will send it back."
     )
 
 
 @dp.message(Command("help"))
 async def cmd_help(message: Message):
-    await message.answer("Это бот Максима. Напиши что-нибудь")
+    await message.answer(
+        "🇷🇺: Это эхо-бот. Напиши что-нибудь.\n\n"
+        "🇬🇧: This is an echo bot. Write something."
+    )
 
 
 @dp.message()
@@ -55,9 +60,9 @@ async def main():
     port = int(os.environ.get("PORT", 8080))
     site = web.TCPSite(runner, '0.0.0.0', port)
     await site.start()
-    print(f"Веб-сервер запущен на порту {port}")
+    print(f"Web server started on port {port}")
 
-    print("Бот запущен и готов к работе")
+    print("Bot is started and ready to work")
     await dp.start_polling(bot)
 
 
